@@ -16,25 +16,39 @@ import com.glong.sample.localtest.LocalServer;
 
 import java.util.List;
 
+ /**
+  * 用户阅读界面
+ * @Title: com/glong/sample/activities/CustomReaderActivity.java:19
+ * @ProjectName
+ * @Description: TODO
+ * @author zhangyang
+ * @date
+ */
 public class CustomReaderActivity extends AppCompatActivity {
 
+    //阅读的主界面
     private ReaderView mReaderView;
+    //阅读对应的适配器：章节实体,内容实体
     private ReaderView.Adapter<ChapterItemBean, ChapterContentBean> mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_reader);
-
+        //初始化 对应的view
         initReaderView();
+        //初始化数据
         initData();
     }
 
     private void initData() {
+        //首先 获取 章节的数据
         LocalServer.getChapterList("1", new LocalServer.OnResponseCallback() {
             @Override
             public void onSuccess(List<ChapterItemBean> chapters) {
+                //适配器 设置 章节的数据
                 mAdapter.setChapterList(chapters);
+                //进行适配器更新
                 mAdapter.notifyDataSetChanged();
             }
 
@@ -45,9 +59,20 @@ public class CustomReaderActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     *   初始化readerview
+    　　* @Description: TODO
+    　　* @param
+    　　* @return
+    　　* @throws
+    　　* @author zhangyang
+    　　* @date 2018/12/8 20:04
+    　　*/
     private void initReaderView() {
         mReaderView = findViewById(R.id.custom_reader_view);
+        //初始化 配置管理器
         ReaderView.ReaderManager readerManager = new ReaderView.ReaderManager();
+
         mReaderView.setReaderManager(readerManager);
 
         mAdapter = new ReaderView.Adapter<ChapterItemBean, ChapterContentBean>() {

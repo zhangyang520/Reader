@@ -23,6 +23,10 @@ import java.util.List;
 import java.util.Locale;
 
 /**
+ *  处理所有页面上
+ *   计算:
+ *   具体画文字:
+ *   图标等等:
  * Created by Garrett on 2018/11/17.
  * contact me krouky@outlook.com
  */
@@ -36,7 +40,7 @@ public class ReaderResolve {
     //本章在总章节中的索引
     protected int mChapterIndex;
 
-    //当前页第一个字符在本章中
+    //当前页第一个字符在本章中 字符索引
     protected int mCharIndex;
 
 
@@ -49,21 +53,22 @@ public class ReaderResolve {
     // 总章节数
     protected int mChapterSum;
 
+    //阅读区域的 宽度 和 高度
     protected int mAreaWidth;
     protected int mAreaHeight;
 
     // 电池电量
     private int mBattery = 50;
-    /***************************人工智能分割线 外部设置的属性end************************/
+    /***************************  人工智能分割线 外部设置的属性end ************************/
 
     //当前章节总页数，页数根据文字间距，字体大小而变化
     protected int mPageSum;
 
-    //本章中页码
+    //本章中页码 一章中 对应的页面 编码
     protected int mPageIndex;
 
-    protected List<ShowLine> mShowLines;
-    protected List<ShowLine> mChapterNameLines;
+    protected List<ShowLine> mShowLines; //每一行 的集合数据
+    protected List<ShowLine> mChapterNameLines; //> 章节名称的集合
 
     protected int mLineNumPerPageWithoutFirstPage;//一页能展示多少行（除第0页）
     protected int mLineNumPerPageInFirstPage;//一页能展示多少行（第0页）
@@ -76,8 +81,10 @@ public class ReaderResolve {
     protected Paint mChapterPaint = new Paint(Paint.ANTI_ALIAS_FLAG);// 画章节名称的Paint
     protected Paint mBatteryPaint = new Paint(Paint.ANTI_ALIAS_FLAG);// 画电池的画笔
 
+    //日期的 格式化 小时:分钟
     protected SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.CHINA);
 
+    //计算 百分比 进度的格式化 实体
     protected DecimalFormat decimalFormat = new DecimalFormat("#0.00");
 
     /**
@@ -96,6 +103,9 @@ public class ReaderResolve {
         initPaints();
     }
 
+    /**
+     * 初始化 paint对应的画饼
+     */
     private void initPaints() {
         mMainBodyPaint.setColor(mReaderConfig.getColorsConfig().getTextColor());
         mMainBodyPaint.setTextSize(mReaderConfig.getTextSize());
@@ -498,10 +508,16 @@ public class ReaderResolve {
         mCharIndex = charIndex;
     }
 
+    /**
+     * 设置 阅读的区域
+     * @param areaWidth
+     * @param areaHeight
+     */
     public void setArea(int areaWidth, int areaHeight) {
         DLog.d(TAG, "areaWidth:" + areaWidth + ",areaHeight:" + areaHeight);
         this.mAreaWidth = areaWidth;
         this.mAreaHeight = areaHeight;
+        //计算 章节的参数
         calculateChapterParameter();
     }
 
@@ -532,28 +548,33 @@ public class ReaderResolve {
         return mReaderConfig;
     }
 
+    /**
+     * 设置 阅读的配置实体
+     * @param readerConfig
+     */
     void setReaderConfig(@NonNull ReaderConfig readerConfig) {
         ReaderConfig oldReaderConfig = mReaderConfig;
         mReaderConfig = readerConfig;
 
+        //取出 旧的阅读配置的相关信息
         int oldTextSize = oldReaderConfig.getTextSize();
-//        int[] oldBatteryWidthAndHeight = oldReaderConfig.getBatteryWidthAndHeight();
         int oldLineSpace = oldReaderConfig.getLineSpace();
         int[] oldPadding = oldReaderConfig.getPadding();
         ColorsConfig oldColorsConfig = oldReaderConfig.getColorsConfig();
 
+        //取出 新的阅读配置的相关信息
         int newTextSize = readerConfig.getTextSize();
-//        int[] newBatteryWidthAndHeight = readerConfig.getBatteryWidthAndHeight();
         int newLineSpace = readerConfig.getLineSpace();
         int[] newPadding = readerConfig.getPadding();
         ColorsConfig newColorsConfig = readerConfig.getColorsConfig();
 
-
+        //比对 前后文字大小不一致 初始化 paint
         if (oldTextSize != newTextSize || oldColorsConfig.getTextColor() != newColorsConfig.getTextColor()
                 || oldColorsConfig.getBatteryColor() != newColorsConfig.getBatteryColor()) {
             initPaints();
         }
 
+        //比对 文本文字大小 空间长度 内部边距的配置
         if (oldTextSize != newTextSize || oldLineSpace != newLineSpace || oldPadding != newPadding) {
             calculateChapterParameter();
         }

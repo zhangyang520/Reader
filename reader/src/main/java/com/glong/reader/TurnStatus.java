@@ -1,6 +1,7 @@
 package com.glong.reader;
 
 /**
+ * 翻页动作的 返回的实体
  * Created by Garrett on 2018/11/17.
  * contact me krouky@outlook.com
  */
@@ -34,22 +35,22 @@ public enum TurnStatus {
     /**
      * 没有上一章
      */
-    NO_PREV_CHAPTER
+    NO_PREV_CHAPTER,
 
-//    /**
-//     * 等待中，代表上次的下载还未完成
-//     * 这个时候不处理翻页请求
-//     */
-//    LOADING,
+    /**
+     * 等待中，代表上次的下载还未完成
+     * 这个时候不处理翻页请求
+     */
+    LOADING,
 
-//    /**
-//     * 没有下一页
-//     */
-//    NO_NEXT_PAGE,
-//
-//    /**
-//     * 没有上一页
-//     */
-//    NO_PREV_PAGE,
+    /**
+     * 没有下一页
+     */
+    NO_NEXT_PAGE,
+
+    /**
+     * 没有上一页
+     */
+    NO_PREV_PAGE,
 
 }

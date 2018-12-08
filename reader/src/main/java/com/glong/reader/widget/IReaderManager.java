@@ -8,6 +8,8 @@ import com.glong.reader.TurnStatus;
 import java.io.File;
 
 /**
+ *
+ * 阅读 动作的封装
  * Created by Garrett on 2018/11/17.
  * contact me krouky@outlook.com
  */
@@ -69,5 +71,9 @@ interface IReaderManager {
      */
     void startFromCache(File cacheDir, String key, int chapterIndex, int charIndex, @NonNull String chapterName);
 
+    /**
+     *  绘制 阅读的界面
+     * @param canvas 绘制画饼
+     */
     void drawPage(Canvas canvas);
 }

@@ -7,6 +7,7 @@ import java.util.List;
  */
 public class ShowLine {
 
+    //每行中 每个 字符的集合数据
     public List<ShowChar> charsData;
 
     /**
@@ -24,15 +25,24 @@ public class ShowLine {
      */
     public boolean endWithWrapMark;
 
+    /**
+     * 获取 每一行的数据
+     * @return
+     */
     public String getLineData() {
         String lineData = "";
+        StringBuilder sb=new StringBuilder("");
         if (charsData == null || charsData.size() == 0) return lineData;
         for (ShowChar c : charsData) {
-            lineData = lineData + c.charData;
+            sb.append(c.charData);
         }
-        return lineData;
+        return sb.toString();
     }
 
+    /**
+     * 获取 每一行首个字符 在这个段落的indexf
+     * @return
+     */
     public int getLineFirstIndexInChapter() {
         if (charsData == null || charsData.size() <= 0) {
             return -1;
@@ -40,6 +50,10 @@ public class ShowLine {
         return charsData.get(0).indexInChapter;
     }
 
+    /**
+     *  获取 改行中的最后一个字符 在章节中的index
+     * @return
+     */
     public int getLineLastIndexInChapter() {
         if (charsData == null || charsData.size() <= 0) {
             return -1;

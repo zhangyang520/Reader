@@ -3,6 +3,7 @@ package com.glong.reader.config;
 import android.support.annotation.ColorInt;
 
 /**
+ * 颜色的配置
  * Created by Garrett on 2018/11/18.
  * contact me krouky@outlook.com
  */

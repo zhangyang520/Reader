@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Size;
 
 /**
+ * 阅读器 配置 采用构造器方法
  * Created by Garrett on 2018/11/17.
  * contact me krouky@outlook.com
  */
@@ -91,13 +92,15 @@ public class ReaderConfig {
     }
 
     public static class Builder {
-
+        //文本大小
         private int mTextSize = 60;
-
+        //正文的边界
         private int[] mPadding = {40, 70, 40, 70};
-
+        //正文行间距
         private int mLineSpace = 10;
-
+        /**
+         * 电池宽度和高度
+         */
         private int[] mBatteryWidthAndHeight = new int[]{60, 30};
 
         private ColorsConfig mColorsConfig = new ColorsConfig(Color.BLACK, Color.BLACK);

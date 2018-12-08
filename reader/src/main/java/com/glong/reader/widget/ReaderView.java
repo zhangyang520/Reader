@@ -565,15 +565,27 @@ public class ReaderView extends FrameLayout {
         }
     }
 
+
+     /**
+      *    readerView的 内部静态类 readerManager
+         * @Title:
+         * @ProjectName
+         * @Description: TODO
+         * @author zhangyang
+         * @date
+         */
     public static class ReaderManager implements IReaderManager {
         private static final String TAG = "ReaderView#ReaderManage";
-
+        //是否使用 缓存
         private boolean mIsUsingCache;
-
-        private TurnStatus mLastTurnStatus = TurnStatus.IDLE;
-        ReaderView mReaderView;
-        Cache mCache;
-        ReaderResolve mReaderResolve;
+         //翻页动作的 状态值
+         private TurnStatus mLastTurnStatus = TurnStatus.IDLE;
+         //阅读的view对象
+         ReaderView mReaderView;
+         //缓存容器对象
+         Cache mCache;
+         //阅读的
+         ReaderResolve mReaderResolve;
 
         private OnReaderWatcherListener mOnReaderWatcherListener;
         private ExecutorService mFixedThreadPool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());

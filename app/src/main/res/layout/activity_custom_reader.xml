@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".activities.CustomReaderActivity">
 
+    <!--阅读器的实体view-->
     <com.glong.reader.widget.ReaderView
         android:id="@+id/custom_reader_view"
         android:layout_width="match_parent"

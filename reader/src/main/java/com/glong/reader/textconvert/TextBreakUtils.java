@@ -55,9 +55,11 @@ public class TextBreakUtils {
 
         for (int i = 0, size = cs.length; i < size; i++) {
             String measureStr = String.valueOf(cs[i]);
+            //计算对应的字符的长度
             float charWidth = paint.measureText(measureStr);
 
             for (String paragraph : sParagraph) {
+                //判断 换行
                 if (paragraph != null && paragraph.length() > 0 && size - i >= paragraph.length()) {
                     char[] paragraphArray = paragraph.toCharArray();
                     int length = paragraphArray.length;
@@ -95,6 +97,15 @@ public class TextBreakUtils {
         return breakResult;
     }
 
+    /**
+     * 计算 对应的字符串 是否 满足 一行长度的信息
+     * @param fromIndex
+     * @param text
+     * @param measureWidth
+     * @param textPadding
+     * @param paint
+     * @return
+     */
     public static BreakResult breakText(int fromIndex, String text, float measureWidth, float textPadding, Paint paint) {
         return breakText(fromIndex, text.toCharArray(), measureWidth, textPadding, paint);
     }
@@ -129,6 +140,7 @@ public class TextBreakUtils {
 
         int lineIndex = 0;
         while (textData.length() > 0) {
+            //截除的 结果实体封装
             BreakResult breakResult = breakText(src.length() - textData.length(), textData, measureWidth, textPadding, paint);
             ShowLine showLine = new ShowLine();
             showLine.charsData = breakResult.showChars;
